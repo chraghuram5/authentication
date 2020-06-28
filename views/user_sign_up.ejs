@@ -1,0 +1,17 @@
+<h1>Sign Up</h1>
+<form action="/users/create" method="POST">
+    <label for="email">Email</label>
+    <input type="email" name="email" placeholder="Enter your email" id="email" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="Enter your password" id="password" required>
+    <label for="confirm-password">Confirm Password</label>
+    <input type="password" name="confirm_password" placeholder="Enter your password again" id="confirm-password"
+        required>
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="Enter your username" id="username" required>
+    <button>Submit</button>
+</form>
+
+<p>
+    <a href="/users/auth/google">Google SignIn/SignUp</a>
+</p>
