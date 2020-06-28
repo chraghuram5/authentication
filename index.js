@@ -12,6 +12,7 @@ const MongoStore=require('connect-mongo')(session);
 const flash=require('connect-flash');
 const customMware=require('./config/middleware');
 const passportGoogle=require('./config/passport-google-oauth2-strategy');
+const CryptoJs=require('crypto-js');
 app.use(express.urlencoded());
 
 app.use(cookieParser());
@@ -20,6 +21,7 @@ app.use(express.static('./assets'));
 
 //layouts setup
 app.use(expressLayouts);
+
 // extract style and scripts from sub pages into the layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);

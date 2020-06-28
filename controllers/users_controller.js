@@ -1,4 +1,5 @@
 const User=require('../models/user');
+var CryptoJS = require("crypto-js");
 
 //user profile page
 module.exports.profile=function(req,res){
@@ -34,13 +35,18 @@ module.exports.destroySession=function(req,res){
 module.exports.create=async function(req,res){
 
     if(req.body.password!=req.body.confirm_password){
+        req.flash('error','passwords dont match');
         console.log("Please enter again");
         return res.redirect('back');
     }
     const existingUser=await User.findOne({email: req.body.email});
 
     if(existingUser==null){
-        const user=await User.create(req.body);
+        let userObject={};
+        userObject.username=req.body.username;
+        userObject.password=CryptoJS.AES.encrypt(req.body.password, 'authentication').toString();
+        userObject.email=req.body.email;
+        const user=await User.create(userObject);
         return res.redirect('/users/sign-in');
     }
     else{
@@ -52,5 +58,30 @@ module.exports.create=async function(req,res){
 //create session
 module.exports.createSession=function(req,res){
     req.flash('success','Logged in Successfully');
+    return res.redirect('/users/profile');
+}
+
+module.exports.resetPassword=function(req,res){
+    if(!req.isAuthenticated()){
+        req.flash('error','Please sign in');
+        return res.redirect('back');
+     }
+    return res.render('reset-password');
+}
+
+module.exports.updatePassword=function(req,res){
+
+    if(req.body.password!=req.body.confirm_password){
+        req.flash('error','passwords do not match');
+        return res.redirect('back');
+    }
+
+    let user=User.findByIdAndUpdate(req.body.user_id, {password: CryptoJS.AES.encrypt(req.body.password, 'authentication').toString()}, function(err){
+        if(err){
+            console.log("Error in updating the password");
+            return;
+        }
+    });
+    req.flash('success','password upated succesffuly');
     return res.redirect('/users/profile');
 }

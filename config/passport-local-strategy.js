@@ -1,4 +1,5 @@
 const passport=require('passport');
+const CryptoJS=require('crypto-js');
 
 const LocalStrategy=require('passport-local').Strategy;
 
@@ -18,7 +19,10 @@ passport.use(new LocalStrategy({
                 return done(err);
             }
 
-            if(!user || user.password!=password){
+            let tempUserPassword=CryptoJS.AES.decrypt(user.password, 'authentication');
+            let userPassword=tempUserPassword.toString(CryptoJS.enc.Utf8);
+
+            if(!user || userPassword!=password){
                 req.flash('error','invalid username/password');
                 return done(null, false);
             }
