@@ -11,4 +11,4 @@
 5. Password Encryption while storing in Database
 6. Flash Notifications
 
-##Running the Application
+## Running the Application
