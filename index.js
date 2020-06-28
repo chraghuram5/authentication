@@ -54,7 +54,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//if the user is already authenticated, sets the user in locals
 app.use(passport.setAuthenticatedUser);
+
+//using flash messages
 app.use(flash());
 app.use(customMware.setFlash);
 

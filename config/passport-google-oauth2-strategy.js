@@ -4,6 +4,8 @@ const crypto=require('crypto');
 const User=require('../models/user');
 
 //tell passport to use google strategy
+
+//replace clientID and clientSecret with google oauth credentials
 passport.use(new googleStrategy({
         clientID: "dummy",
         clientSecret: "dummy",

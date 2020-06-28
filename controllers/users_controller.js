@@ -25,6 +25,7 @@ module.exports.signIn=function(req,res){
     return res.render('user_sign_in');
 }
 
+//destroys the session when user clicks logout
 module.exports.destroySession=function(req,res){
     req.logout();
     req.flash('success','You have logged out');
@@ -42,6 +43,7 @@ module.exports.create=async function(req,res){
     const existingUser=await User.findOne({email: req.body.email});
 
     if(existingUser==null){
+        //encrypting password before creating of the record
         let userObject={};
         userObject.username=req.body.username;
         userObject.password=CryptoJS.AES.encrypt(req.body.password, 'authentication').toString();
@@ -61,6 +63,7 @@ module.exports.createSession=function(req,res){
     return res.redirect('/users/profile');
 }
 
+//action for resetting password
 module.exports.resetPassword=function(req,res){
     if(!req.isAuthenticated()){
         req.flash('error','Please sign in');
@@ -69,6 +72,7 @@ module.exports.resetPassword=function(req,res){
     return res.render('reset-password');
 }
 
+//updating password after user clicks reset password button in resetpassword form
 module.exports.updatePassword=function(req,res){
 
     if(req.body.password!=req.body.confirm_password){
@@ -76,6 +80,7 @@ module.exports.updatePassword=function(req,res){
         return res.redirect('back');
     }
 
+    //encrypting password before updating
     let user=User.findByIdAndUpdate(req.body.user_id, {password: CryptoJS.AES.encrypt(req.body.password, 'authentication').toString()}, function(err){
         if(err){
             console.log("Error in updating the password");

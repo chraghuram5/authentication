@@ -19,6 +19,7 @@ passport.use(new LocalStrategy({
                 return done(err);
             }
 
+            //decrypt password before verifying
             let tempUserPassword=CryptoJS.AES.decrypt(user.password, 'authentication');
             let userPassword=tempUserPassword.toString(CryptoJS.enc.Utf8);
 
