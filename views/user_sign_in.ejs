@@ -1,12 +1,16 @@
 
-
+<html>
+<head>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfNpqoZAAAAAHwskZRcLzo97x-WPEoh3gLo8at2"></script>
+</head>
+<body>
 <div class="form-card">
     <div class="card" style="width: 25%;">
         <div class="card-header text-center">Sign In</div>
         <div class="card-header text-center bg-transparent"><a class="btn btn-primary btn-lg btn-block"
                 href="/users/auth/google" role="button"><i class="fab fa-google"></i>Sign in with Google</a></div>
         <div class="card-body">
-            <form action="/users/create-session" method="POST">
+            <form action="/users/create-session" id="captcha-form" method="POST">
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
@@ -24,3 +28,5 @@
         </div>
     </div>
 </div>
+</body>
+</html>
