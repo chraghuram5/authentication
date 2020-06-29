@@ -13,10 +13,9 @@ const flash=require('connect-flash');
 const customMware=require('./config/middleware');
 const passportGoogle=require('./config/passport-google-oauth2-strategy');
 const CryptoJs=require('crypto-js');
-app.use(express.urlencoded());
-
-app.use(cookieParser());
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 app.use(express.static('./assets'));
 
 //layouts setup

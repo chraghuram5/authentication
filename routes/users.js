@@ -14,6 +14,7 @@ router.post('/create', usersController.create);
 router.get('/sign-out', usersController.destroySession);
 router.get('/reset-password', usersController.resetPassword);
 router.post('/update-password',passport.checkAuthentication, usersController.updatePassword);
+router.post('/captcha',usersController.captcha);
 
 //use passport as a middleware to authenticate
 router.post('/create-session', passport.authenticate('local', { failureRedirect: '/users/sign-in' }), usersController.createSession);
