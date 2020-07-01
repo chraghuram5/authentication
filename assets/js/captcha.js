@@ -3,7 +3,7 @@ document.getElementById('captcha-form').addEventListener('submit', onSubmit);
 async function onSubmit(e) {
     e.preventDefault();
 
-    let token= await grecaptcha.execute('6LfNpqoZAAAAAHwskZRcLzo97x-WPEoh3gLo8at2', { action: 'homepage' });
+    let token= await grecaptcha.execute('<SITE KEY>', { action: 'homepage' });
     
     const captcha = token;
 
