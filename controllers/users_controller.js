@@ -1,6 +1,6 @@
 const User=require('../models/user');
 var CryptoJS = require("crypto-js");
-const secretKey = '6LfNpqoZAAAAAKpmjZuzdm8RNiRNrgfr4SIX7ye0';
+const secretKey = '<SECRET-KEY>';
 const request = require('request');
 
 //user profile page
