@@ -10,5 +10,6 @@
 4. Reset Password
 5. Password Encryption while storing in Database
 6. Flash Notifications
+7. Google reCAPTCHA v3
 
 ## Running the Application
